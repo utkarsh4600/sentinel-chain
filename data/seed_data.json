@@ -1,0 +1,979 @@
+{
+  "threats": [
+    {
+      "id": "THR-8841",
+      "title": "Malware Detected on Laptop-01",
+      "severity": "critical",
+      "source": "Endpoint Agent",
+      "sourceIp": "192.168.4.12",
+      "targetAsset": "Laptop-01",
+      "country": "United States",
+      "attackType": "Malware",
+      "status": "open",
+      "detectedAt": "2026-07-30T04:45:12Z",
+      "aiConfidence": 97,
+      "mitreTechnique": "T1059 - Command and Scripting Interpreter"
+    },
+    {
+      "id": "THR-8842",
+      "title": "Brute-force Attack on SSH",
+      "severity": "high",
+      "source": "Firewall-01",
+      "sourceIp": "185.220.101.42",
+      "targetAsset": "Server-02",
+      "country": "Germany",
+      "attackType": "Brute Force",
+      "status": "investigating",
+      "detectedAt": "2026-07-30T04:47:33Z",
+      "aiConfidence": 91,
+      "mitreTechnique": "T1110 - Brute Force"
+    },
+    {
+      "id": "THR-8843",
+      "title": "Port Scan Detected",
+      "severity": "medium",
+      "source": "Firewall-01",
+      "sourceIp": "45.83.64.19",
+      "targetAsset": "Firewall-01",
+      "country": "Netherlands",
+      "attackType": "Reconnaissance",
+      "status": "open",
+      "detectedAt": "2026-07-30T05:00:01Z",
+      "aiConfidence": 78,
+      "mitreTechnique": "T1046 - Network Service Discovery"
+    },
+    {
+      "id": "THR-8844",
+      "title": "Unusual Outbound Traffic Volume",
+      "severity": "low",
+      "source": "Cloud-01",
+      "sourceIp": "10.0.2.55",
+      "targetAsset": "Cloud-01",
+      "country": "India",
+      "attackType": "Data Exfiltration",
+      "status": "monitoring",
+      "detectedAt": "2026-07-30T05:01:45Z",
+      "aiConfidence": 64,
+      "mitreTechnique": "T1041 - Exfiltration Over C2 Channel"
+    },
+    {
+      "id": "THR-8845",
+      "title": "Privilege Escalation Attempt",
+      "severity": "high",
+      "source": "DB-Server",
+      "sourceIp": "172.16.0.9",
+      "targetAsset": "DB-Server",
+      "country": "India",
+      "attackType": "Privilege Escalation",
+      "status": "open",
+      "detectedAt": "2026-07-30T05:02:18Z",
+      "aiConfidence": 88,
+      "mitreTechnique": "T1068 - Exploitation for Privilege Escalation"
+    },
+    {
+      "id": "THR-8846",
+      "title": "Impossible Travel Login Detected",
+      "severity": "critical",
+      "source": "Identity Provider",
+      "sourceIp": "203.0.113.77",
+      "targetAsset": "Finance-Server-01",
+      "country": "Brazil",
+      "attackType": "Account Compromise",
+      "status": "investigating",
+      "detectedAt": "2026-07-30T05:04:02Z",
+      "aiConfidence": 95,
+      "mitreTechnique": "T1078 - Valid Accounts"
+    },
+    {
+      "id": "THR-8847",
+      "title": "Multiple Failed MFA Challenges",
+      "severity": "medium",
+      "source": "Identity Provider",
+      "sourceIp": "198.51.100.23",
+      "targetAsset": "User-jsmith",
+      "country": "United Kingdom",
+      "attackType": "Credential Stuffing",
+      "status": "open",
+      "detectedAt": "2026-07-30T05:06:40Z",
+      "aiConfidence": 82,
+      "mitreTechnique": "T1110.003 - Password Spraying"
+    },
+    {
+      "id": "THR-8848",
+      "title": "Suspicious PowerShell Execution",
+      "severity": "high",
+      "source": "Endpoint Agent",
+      "sourceIp": "192.168.4.31",
+      "targetAsset": "Laptop-14",
+      "country": "United States",
+      "attackType": "Living off the Land",
+      "status": "contained",
+      "detectedAt": "2026-07-30T05:09:55Z",
+      "aiConfidence": 89,
+      "mitreTechnique": "T1059.001 - PowerShell"
+    }
+  ],
+  "incidents": [
+    {
+      "id": "INC-1024",
+      "title": "Malware Detected on Laptop-01",
+      "severity": "critical",
+      "status": "open",
+      "assignedTo": "Riya Singh",
+      "createdAt": "2026-07-30T04:45:12Z",
+      "updatedAt": "2026-07-30T05:10:00Z",
+      "affectedAssets": [
+        "Laptop-01"
+      ],
+      "description": "Endpoint agent flagged a known trojan signature combined with anomalous process ancestry (unsigned binary spawning from a temp directory). AI ensemble scored this as high-confidence malware based on entropy analysis of the executable and unusual outbound connection attempts immediately following execution.",
+      "mitreTechniques": [
+        "T1059 - Command and Scripting Interpreter",
+        "T1055 - Process Injection"
+      ],
+      "aiRecommendation": "Isolate Laptop-01 from the network immediately and initiate full disk forensic capture before remediation. High confidence this is an active infection, not a false positive.",
+      "blockchainVerified": true,
+      "evidenceRecordId": "EVD-3391"
+    },
+    {
+      "id": "INC-1025",
+      "title": "Brute-force Attack on SSH",
+      "severity": "high",
+      "status": "investigating",
+      "assignedTo": "John Doe",
+      "createdAt": "2026-07-30T04:47:33Z",
+      "updatedAt": "2026-07-30T05:05:00Z",
+      "affectedAssets": [
+        "Server-02"
+      ],
+      "description": "Over 400 failed SSH authentication attempts from a single external IP within an 8-minute window, targeting three known service accounts. Pattern matches automated credential-stuffing tooling rather than manual attempts.",
+      "mitreTechniques": [
+        "T1110 - Brute Force"
+      ],
+      "aiRecommendation": "Temporarily block source IP at the firewall and enforce key-based SSH authentication going forward. Review whether any of the three targeted accounts have login history from this IP range.",
+      "blockchainVerified": true,
+      "evidenceRecordId": "EVD-3392"
+    },
+    {
+      "id": "INC-1026",
+      "title": "Data Exfiltration Attempt",
+      "severity": "medium",
+      "status": "monitoring",
+      "assignedTo": "Jane Smith",
+      "createdAt": "2026-07-30T05:00:01Z",
+      "updatedAt": "2026-07-30T05:15:00Z",
+      "affectedAssets": [
+        "Cloud-01"
+      ],
+      "description": "Outbound transfer of 5.2 GB to an unfamiliar external endpoint from a workload with no prior history of large external transfers. Timing coincides with an authenticated session from an unusual geographic location.",
+      "mitreTechniques": [
+        "T1041 - Exfiltration Over C2 Channel"
+      ],
+      "aiRecommendation": "Continue monitoring; confidence is moderate. Recommend confirming with the asset owner whether this transfer was expected before escalating to containment.",
+      "blockchainVerified": false
+    },
+    {
+      "id": "INC-1027",
+      "title": "Port Scan Detected",
+      "severity": "low",
+      "status": "closed",
+      "assignedTo": "SOC Analyst",
+      "createdAt": "2026-07-29T22:51:45Z",
+      "updatedAt": "2026-07-30T00:10:00Z",
+      "affectedAssets": [
+        "Firewall-01"
+      ],
+      "description": "Sequential scan across 1,024 ports from a known scanning-service IP range (consistent with routine internet-wide research scanning, not a targeted probe).",
+      "mitreTechniques": [
+        "T1046 - Network Service Discovery"
+      ],
+      "aiRecommendation": "No action required. Source IP matches a known benign research-scanner range.",
+      "blockchainVerified": true,
+      "evidenceRecordId": "EVD-3388"
+    },
+    {
+      "id": "INC-1028",
+      "title": "Impossible Travel Login Detected",
+      "severity": "critical",
+      "status": "investigating",
+      "assignedTo": "Riya Singh",
+      "createdAt": "2026-07-30T05:04:02Z",
+      "updatedAt": "2026-07-30T05:20:00Z",
+      "affectedAssets": [
+        "Finance-Server-01",
+        "User-mchen"
+      ],
+      "description": "User mchen authenticated from Mumbai at 04:58 and again from S\u00e3o Paulo at 05:04 \u2014 a travel time physically impossible between sessions. Session token reuse from a residential proxy IP is suspected.",
+      "mitreTechniques": [
+        "T1078 - Valid Accounts"
+      ],
+      "aiRecommendation": "Force logout of all active sessions for user mchen and require re-authentication with MFA. High confidence of credential or session compromise.",
+      "blockchainVerified": true,
+      "evidenceRecordId": "EVD-3393"
+    },
+    {
+      "id": "INC-1029",
+      "title": "Suspicious PowerShell Execution Chain",
+      "severity": "high",
+      "status": "contained",
+      "assignedTo": "John Doe",
+      "createdAt": "2026-07-30T05:09:55Z",
+      "updatedAt": "2026-07-30T05:30:00Z",
+      "affectedAssets": [
+        "Laptop-14"
+      ],
+      "description": "Obfuscated PowerShell command downloaded and executed a secondary payload in memory, consistent with a living-off-the-land technique commonly used to evade signature-based detection.",
+      "mitreTechniques": [
+        "T1059.001 - PowerShell",
+        "T1027 - Obfuscated Files or Information"
+      ],
+      "aiRecommendation": "Host has been isolated automatically per policy. Awaiting analyst review before returning to service.",
+      "blockchainVerified": true,
+      "evidenceRecordId": "EVD-3394"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "EVD-3391",
+      "blockNumber": 585231,
+      "txHash": "0x8f2a...c19e",
+      "incidentId": "INC-1024",
+      "validator": "Org1-Peer0",
+      "timestamp": "2026-07-30T05:10:05Z",
+      "verified": true,
+      "digitalSignature": "3045022100..."
+    },
+    {
+      "id": "EVD-3392",
+      "blockNumber": 585230,
+      "txHash": "0x1b7d...9a4f",
+      "incidentId": "INC-1025",
+      "validator": "Org2-Peer0",
+      "timestamp": "2026-07-30T05:05:22Z",
+      "verified": true,
+      "digitalSignature": "3044022087..."
+    },
+    {
+      "id": "EVD-3393",
+      "blockNumber": 585229,
+      "txHash": "0xef34...771c",
+      "incidentId": "INC-1028",
+      "validator": "Org1-Peer0",
+      "timestamp": "2026-07-30T05:04:40Z",
+      "verified": true,
+      "digitalSignature": "3045022064..."
+    },
+    {
+      "id": "EVD-3394",
+      "blockNumber": 585228,
+      "txHash": "0x902c...3e8b",
+      "incidentId": "INC-1029",
+      "validator": "Org2-Peer1",
+      "timestamp": "2026-07-30T05:09:59Z",
+      "verified": true,
+      "digitalSignature": "3046022100..."
+    },
+    {
+      "id": "EVD-3388",
+      "blockNumber": 585224,
+      "txHash": "0x44aa...11d9",
+      "incidentId": "INC-1027",
+      "validator": "Org1-Peer1",
+      "timestamp": "2026-07-30T00:10:03Z",
+      "verified": true,
+      "digitalSignature": "3045022071..."
+    }
+  ],
+  "assets": [
+    {
+      "id": "AST-001",
+      "name": "Laptop-01",
+      "type": "laptop",
+      "status": "compromised",
+      "ipAddress": "192.168.4.12",
+      "owner": "Amit Kapoor",
+      "location": "Bengaluru HQ",
+      "riskScore": 92,
+      "lastSeen": "2026-07-30T05:10:00Z",
+      "os": "Windows 11 Pro",
+      "tags": [
+        "finance",
+        "vip"
+      ]
+    },
+    {
+      "id": "AST-002",
+      "name": "Server-02",
+      "type": "server",
+      "status": "at-risk",
+      "ipAddress": "10.0.1.22",
+      "owner": "Platform Team",
+      "location": "AWS ap-south-1",
+      "riskScore": 74,
+      "lastSeen": "2026-07-30T05:09:00Z",
+      "os": "Ubuntu 22.04",
+      "tags": [
+        "production",
+        "ssh-exposed"
+      ]
+    },
+    {
+      "id": "AST-003",
+      "name": "Firewall-01",
+      "type": "firewall",
+      "status": "healthy",
+      "ipAddress": "10.0.0.1",
+      "owner": "Network Team",
+      "location": "Bengaluru HQ",
+      "riskScore": 22,
+      "lastSeen": "2026-07-30T05:11:00Z",
+      "tags": [
+        "perimeter"
+      ]
+    },
+    {
+      "id": "AST-004",
+      "name": "Cloud-01",
+      "type": "cloud",
+      "status": "at-risk",
+      "ipAddress": "10.0.2.55",
+      "owner": "Data Team",
+      "location": "AWS ap-south-1",
+      "riskScore": 61,
+      "lastSeen": "2026-07-30T05:08:00Z",
+      "tags": [
+        "data-pipeline"
+      ]
+    },
+    {
+      "id": "AST-005",
+      "name": "DB-Server",
+      "type": "database",
+      "status": "at-risk",
+      "ipAddress": "172.16.0.9",
+      "owner": "Platform Team",
+      "location": "On-Prem DC",
+      "riskScore": 68,
+      "lastSeen": "2026-07-30T05:07:00Z",
+      "os": "PostgreSQL 16",
+      "tags": [
+        "critical",
+        "pii"
+      ]
+    },
+    {
+      "id": "AST-006",
+      "name": "Finance-Server-01",
+      "type": "server",
+      "status": "compromised",
+      "ipAddress": "10.0.1.40",
+      "owner": "Finance IT",
+      "location": "On-Prem DC",
+      "riskScore": 88,
+      "lastSeen": "2026-07-30T05:04:00Z",
+      "os": "Windows Server 2022",
+      "tags": [
+        "finance",
+        "critical"
+      ]
+    },
+    {
+      "id": "AST-007",
+      "name": "K8s-Cluster-Prod",
+      "type": "kubernetes",
+      "status": "healthy",
+      "ipAddress": "10.0.5.0/24",
+      "owner": "Platform Team",
+      "location": "AWS ap-south-1",
+      "riskScore": 18,
+      "lastSeen": "2026-07-30T05:11:00Z",
+      "tags": [
+        "production"
+      ]
+    },
+    {
+      "id": "AST-008",
+      "name": "Switch-Core-01",
+      "type": "switch",
+      "status": "healthy",
+      "ipAddress": "10.0.0.2",
+      "owner": "Network Team",
+      "location": "Bengaluru HQ",
+      "riskScore": 12,
+      "lastSeen": "2026-07-30T05:11:00Z",
+      "tags": [
+        "core-network"
+      ]
+    },
+    {
+      "id": "AST-009",
+      "name": "Container-auth-svc",
+      "type": "container",
+      "status": "healthy",
+      "ipAddress": "10.0.5.14",
+      "owner": "Platform Team",
+      "location": "AWS ap-south-1",
+      "riskScore": 15,
+      "lastSeen": "2026-07-30T05:11:00Z",
+      "tags": [
+        "microservice"
+      ]
+    },
+    {
+      "id": "AST-010",
+      "name": "Mobile-Fleet-iOS",
+      "type": "mobile",
+      "status": "healthy",
+      "ipAddress": "Managed / MDM",
+      "owner": "IT Ops",
+      "location": "Fleet-wide",
+      "riskScore": 24,
+      "lastSeen": "2026-07-30T05:00:00Z",
+      "tags": [
+        "byod"
+      ]
+    }
+  ],
+  "audit": [
+    {
+      "id": "AUD-1001",
+      "actor": "Riya Singh",
+      "action": "Approved automated response",
+      "target": "INC-1024",
+      "timestamp": "2026-07-30T05:11:00Z",
+      "ip": "10.0.0.14",
+      "result": "success"
+    },
+    {
+      "id": "AUD-1002",
+      "actor": "John Doe",
+      "action": "Updated incident status",
+      "target": "INC-1025",
+      "timestamp": "2026-07-30T05:06:00Z",
+      "ip": "10.0.0.22",
+      "result": "success"
+    },
+    {
+      "id": "AUD-1003",
+      "actor": "System",
+      "action": "Anchored evidence to ledger",
+      "target": "EVD-3393",
+      "timestamp": "2026-07-30T05:04:40Z",
+      "ip": "internal",
+      "result": "success"
+    },
+    {
+      "id": "AUD-1004",
+      "actor": "carlos.mendes@sentinelchain.io",
+      "action": "Login attempt",
+      "target": "Authentication Service",
+      "timestamp": "2026-07-30T04:58:00Z",
+      "ip": "198.51.100.23",
+      "result": "failed"
+    },
+    {
+      "id": "AUD-1005",
+      "actor": "Jane Smith",
+      "action": "Generated compliance report",
+      "target": "RPT-904",
+      "timestamp": "2026-07-30T00:00:00Z",
+      "ip": "10.0.0.31",
+      "result": "success"
+    },
+    {
+      "id": "AUD-1006",
+      "actor": "Arman Verma",
+      "action": "Modified integration settings",
+      "target": "Slack Integration",
+      "timestamp": "2026-07-29T22:40:00Z",
+      "ip": "10.0.0.19",
+      "result": "success"
+    },
+    {
+      "id": "AUD-1007",
+      "actor": "Meera Iyer",
+      "action": "Exported audit trail",
+      "target": "EVD-3388..EVD-3394",
+      "timestamp": "2026-07-29T18:20:00Z",
+      "ip": "10.0.0.27",
+      "result": "success"
+    }
+  ],
+  "reports": [
+    {
+      "id": "RPT-901",
+      "title": "Daily Security Summary \u2014 Jul 29",
+      "type": "Daily",
+      "generatedAt": "2026-07-30T01:00:00Z",
+      "generatedBy": "System",
+      "sizeKb": 214
+    },
+    {
+      "id": "RPT-902",
+      "title": "Weekly SOC Performance Report",
+      "type": "Weekly",
+      "generatedAt": "2026-07-28T06:00:00Z",
+      "generatedBy": "System",
+      "sizeKb": 892
+    },
+    {
+      "id": "RPT-903",
+      "title": "Incident Report \u2014 INC-1024 Malware Detection",
+      "type": "Incident",
+      "generatedAt": "2026-07-30T05:30:00Z",
+      "generatedBy": "Riya Singh",
+      "sizeKb": 156
+    },
+    {
+      "id": "RPT-904",
+      "title": "Monthly Compliance Summary \u2014 July 2026",
+      "type": "Compliance",
+      "generatedAt": "2026-07-30T00:00:00Z",
+      "generatedBy": "System",
+      "sizeKb": 1240
+    },
+    {
+      "id": "RPT-905",
+      "title": "Blockchain Evidence Audit Trail",
+      "type": "Blockchain Audit",
+      "generatedAt": "2026-07-29T18:00:00Z",
+      "generatedBy": "Jane Smith",
+      "sizeKb": 340
+    },
+    {
+      "id": "RPT-906",
+      "title": "AI Model Performance Report",
+      "type": "AI",
+      "generatedAt": "2026-07-27T12:00:00Z",
+      "generatedBy": "John Doe",
+      "sizeKb": 478
+    }
+  ],
+  "alerts": [
+    {
+      "id": "ALT-5501",
+      "time": "04:45:12",
+      "severity": "critical",
+      "source": "Laptop-01",
+      "message": "Malware Detected",
+      "status": "open"
+    },
+    {
+      "id": "ALT-5502",
+      "time": "04:47:33",
+      "severity": "high",
+      "source": "Server-02",
+      "message": "Multiple Failed Logins",
+      "status": "investigating"
+    },
+    {
+      "id": "ALT-5503",
+      "time": "05:00:01",
+      "severity": "medium",
+      "source": "Firewall-01",
+      "message": "Port Scan Detected",
+      "status": "open"
+    },
+    {
+      "id": "ALT-5504",
+      "time": "05:01:45",
+      "severity": "low",
+      "source": "Cloud-01",
+      "message": "Unusual Traffic",
+      "status": "monitoring"
+    },
+    {
+      "id": "ALT-5505",
+      "time": "05:02:18",
+      "severity": "high",
+      "source": "DB-Server",
+      "message": "Privilege Escalation",
+      "status": "open"
+    },
+    {
+      "id": "ALT-5506",
+      "time": "05:04:02",
+      "severity": "critical",
+      "source": "Finance-Server-01",
+      "message": "Impossible Travel Login",
+      "status": "investigating"
+    }
+  ],
+  "compliance": [
+    {
+      "id": "soc2",
+      "name": "SOC 2",
+      "fullName": "Service Organization Control 2",
+      "status": "compliant",
+      "score": 96,
+      "controlsPassed": 58,
+      "controlsTotal": 60,
+      "lastAudit": "2026-06-15"
+    },
+    {
+      "id": "iso27001",
+      "name": "ISO 27001",
+      "fullName": "Information Security Management",
+      "status": "compliant",
+      "score": 93,
+      "controlsPassed": 108,
+      "controlsTotal": 114,
+      "lastAudit": "2026-05-30"
+    },
+    {
+      "id": "nist",
+      "name": "NIST CSF",
+      "fullName": "NIST Cybersecurity Framework",
+      "status": "partial",
+      "score": 81,
+      "controlsPassed": 89,
+      "controlsTotal": 108,
+      "lastAudit": "2026-06-01"
+    },
+    {
+      "id": "hipaa",
+      "name": "HIPAA",
+      "fullName": "Health Insurance Portability and Accountability Act",
+      "status": "compliant",
+      "score": 98,
+      "controlsPassed": 44,
+      "controlsTotal": 45,
+      "lastAudit": "2026-04-22"
+    },
+    {
+      "id": "gdpr",
+      "name": "GDPR",
+      "fullName": "General Data Protection Regulation",
+      "status": "partial",
+      "score": 78,
+      "controlsPassed": 32,
+      "controlsTotal": 41,
+      "lastAudit": "2026-05-10"
+    },
+    {
+      "id": "pcidss",
+      "name": "PCI DSS",
+      "fullName": "Payment Card Industry Data Security Standard",
+      "status": "compliant",
+      "score": 91,
+      "controlsPassed": 79,
+      "controlsTotal": 87,
+      "lastAudit": "2026-06-28"
+    }
+  ],
+  "soc": [
+    {
+      "name": "Riya Singh",
+      "resolved": 42,
+      "avgResponse": "6m",
+      "score": 96
+    },
+    {
+      "name": "John Doe",
+      "resolved": 37,
+      "avgResponse": "8m",
+      "score": 91
+    },
+    {
+      "name": "Jane Smith",
+      "resolved": 29,
+      "avgResponse": "11m",
+      "score": 87
+    },
+    {
+      "name": "Arman Verma",
+      "resolved": 24,
+      "avgResponse": "9m",
+      "score": 89
+    }
+  ],
+  "users": [
+    {
+      "id": "USR-01",
+      "name": "Riya Singh",
+      "email": "riya.singh@sentinelchain.io",
+      "role": "Administrator",
+      "status": "active",
+      "lastActive": "2026-07-30T05:10:00Z",
+      "mfaEnabled": true
+    },
+    {
+      "id": "USR-02",
+      "name": "John Doe",
+      "email": "john.doe@sentinelchain.io",
+      "role": "Analyst",
+      "status": "active",
+      "lastActive": "2026-07-30T05:05:00Z",
+      "mfaEnabled": true
+    },
+    {
+      "id": "USR-03",
+      "name": "Jane Smith",
+      "email": "jane.smith@sentinelchain.io",
+      "role": "Analyst",
+      "status": "active",
+      "lastActive": "2026-07-30T04:50:00Z",
+      "mfaEnabled": true
+    },
+    {
+      "id": "USR-04",
+      "name": "Arman Verma",
+      "email": "arman.verma@sentinelchain.io",
+      "role": "Analyst",
+      "status": "active",
+      "lastActive": "2026-07-29T22:15:00Z",
+      "mfaEnabled": false
+    },
+    {
+      "id": "USR-05",
+      "name": "Meera Iyer",
+      "email": "meera.iyer@sentinelchain.io",
+      "role": "Auditor",
+      "status": "active",
+      "lastActive": "2026-07-29T14:30:00Z",
+      "mfaEnabled": true
+    },
+    {
+      "id": "USR-06",
+      "name": "Carlos Mendes",
+      "email": "carlos.mendes@sentinelchain.io",
+      "role": "Read-Only",
+      "status": "invited",
+      "lastActive": "\u2014",
+      "mfaEnabled": false
+    },
+    {
+      "id": "USR-07",
+      "name": "Wei Zhang",
+      "email": "wei.zhang@sentinelchain.io",
+      "role": "Analyst",
+      "status": "suspended",
+      "lastActive": "2026-07-12T09:00:00Z",
+      "mfaEnabled": true
+    }
+  ],
+  "cves": [
+    {
+      "id": "CVE-2026-31337",
+      "title": "Remote Code Execution in Apache Log Processor",
+      "severity": "critical",
+      "cvssScore": 9.8,
+      "affectedProduct": "Apache Log4Utils 2.x",
+      "published": "2026-07-15",
+      "exploitAvailable": true
+    },
+    {
+      "id": "CVE-2026-28901",
+      "title": "Privilege Escalation in Container Runtime",
+      "severity": "high",
+      "cvssScore": 8.4,
+      "affectedProduct": "ContainerD < 1.7.9",
+      "published": "2026-07-10",
+      "exploitAvailable": true
+    },
+    {
+      "id": "CVE-2026-27654",
+      "title": "SQL Injection in Legacy Admin Panel",
+      "severity": "high",
+      "cvssScore": 7.9,
+      "affectedProduct": "Internal Admin Tool v3",
+      "published": "2026-07-05",
+      "exploitAvailable": false
+    },
+    {
+      "id": "CVE-2026-25102",
+      "title": "Authentication Bypass in VPN Gateway",
+      "severity": "critical",
+      "cvssScore": 9.1,
+      "affectedProduct": "SecureVPN Gateway 4.2",
+      "published": "2026-06-28",
+      "exploitAvailable": true
+    },
+    {
+      "id": "CVE-2026-22987",
+      "title": "Cross-Site Scripting in Reporting Module",
+      "severity": "medium",
+      "cvssScore": 6.1,
+      "affectedProduct": "Sentinel Chain Reports UI",
+      "published": "2026-06-20",
+      "exploitAvailable": false
+    }
+  ],
+  "iocs": [
+    {
+      "id": "IOC-001",
+      "type": "IP",
+      "value": "185.220.101.42",
+      "threatLevel": "critical",
+      "source": "AlienVault OTX",
+      "firstSeen": "2026-07-28",
+      "tags": [
+        "tor-exit",
+        "brute-force"
+      ]
+    },
+    {
+      "id": "IOC-002",
+      "type": "Domain",
+      "value": "secure-update-portal.net",
+      "threatLevel": "high",
+      "source": "Recorded Future",
+      "firstSeen": "2026-07-27",
+      "tags": [
+        "phishing"
+      ]
+    },
+    {
+      "id": "IOC-003",
+      "type": "Hash",
+      "value": "e3b0c44298fc1c149afbf4c8996fb924",
+      "threatLevel": "critical",
+      "source": "VirusTotal",
+      "firstSeen": "2026-07-29",
+      "tags": [
+        "ransomware",
+        "trojan"
+      ]
+    },
+    {
+      "id": "IOC-004",
+      "type": "URL",
+      "value": "hxxp://185.220.101.42/payload.bin",
+      "threatLevel": "high",
+      "source": "Internal Sandbox",
+      "firstSeen": "2026-07-30",
+      "tags": [
+        "c2",
+        "dropper"
+      ]
+    },
+    {
+      "id": "IOC-005",
+      "type": "IP",
+      "value": "45.83.64.19",
+      "threatLevel": "medium",
+      "source": "AbuseIPDB",
+      "firstSeen": "2026-07-26",
+      "tags": [
+        "scanner"
+      ]
+    },
+    {
+      "id": "IOC-006",
+      "type": "Domain",
+      "value": "cdn-analytics-service.com",
+      "threatLevel": "medium",
+      "source": "Recorded Future",
+      "firstSeen": "2026-07-25",
+      "tags": [
+        "c2",
+        "beaconing"
+      ]
+    }
+  ],
+  "ai_analysis": [
+    {
+      "id": "PRD-501",
+      "model": "GNN Lateral Movement Model",
+      "target": "Laptop-01",
+      "verdict": "Malicious \u2014 Active Infection",
+      "confidence": 97,
+      "timestamp": "2026-07-30T04:45:20Z",
+      "topFeatures": [
+        {
+          "feature": "Unsigned binary from temp directory",
+          "weight": 0.34
+        },
+        {
+          "feature": "Anomalous outbound connections",
+          "weight": 0.28
+        },
+        {
+          "feature": "Process ancestry deviation",
+          "weight": 0.21
+        },
+        {
+          "feature": "High entropy executable",
+          "weight": 0.17
+        }
+      ]
+    },
+    {
+      "id": "PRD-502",
+      "model": "XGBoost Classifier",
+      "target": "Server-02",
+      "verdict": "Brute Force Attack",
+      "confidence": 91,
+      "timestamp": "2026-07-30T04:47:40Z",
+      "topFeatures": [
+        {
+          "feature": "400+ failed logins in 8 minutes",
+          "weight": 0.41
+        },
+        {
+          "feature": "Single source IP",
+          "weight": 0.25
+        },
+        {
+          "feature": "Known credential-stuffing pattern",
+          "weight": 0.22
+        },
+        {
+          "feature": "Off-hours attempt timing",
+          "weight": 0.12
+        }
+      ]
+    },
+    {
+      "id": "PRD-503",
+      "model": "Autoencoder Anomaly Detector",
+      "target": "Cloud-01",
+      "verdict": "Anomalous Data Transfer",
+      "confidence": 64,
+      "timestamp": "2026-07-30T05:01:52Z",
+      "topFeatures": [
+        {
+          "feature": "5.2GB outbound transfer",
+          "weight": 0.38
+        },
+        {
+          "feature": "No prior transfer history",
+          "weight": 0.31
+        },
+        {
+          "feature": "Unfamiliar destination endpoint",
+          "weight": 0.19
+        },
+        {
+          "feature": "Session from new geography",
+          "weight": 0.12
+        }
+      ]
+    },
+    {
+      "id": "PRD-504",
+      "model": "Isolation Forest",
+      "target": "Finance-Server-01",
+      "verdict": "Impossible Travel / Account Compromise",
+      "confidence": 95,
+      "timestamp": "2026-07-30T05:04:10Z",
+      "topFeatures": [
+        {
+          "feature": "Two logins, incompatible geography",
+          "weight": 0.46
+        },
+        {
+          "feature": "Session token reuse pattern",
+          "weight": 0.27
+        },
+        {
+          "feature": "Residential proxy IP",
+          "weight": 0.18
+        },
+        {
+          "feature": "Access to sensitive server",
+          "weight": 0.09
+        }
+      ]
+    }
+  ]
+}
